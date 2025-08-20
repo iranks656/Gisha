@@ -1,0 +1,348 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+header {
+  background: #003366;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  position: flex;
+
+}
+header img {
+      height: 50px;              /* adjust logo size */
+      width: auto;
+      margin-right: 10px;        /* space between logo and title */
+    }
+header nav a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: hover;
+  text-shadow: 0.5px;
+}
+main {
+  padding: 20px;
+}
+section {
+  margin-bottom: 30px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+form input, form textarea {
+  margin-bottom: 10px;
+  padding: 8px;
+}
+form button {
+  background: #003366;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: movable;
+  bottom: 0;
+  width: 100%;
+}
+#services {
+  padding: 40px;
+  background: #fff;
+  text-align: center;
+}
+
+#services h2 {
+  color: #003366;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+#services p {
+  max-width: 800px;
+  margin: 0 auto 30px;
+  font-size: 1.1em;
+  color: #444;
+}
+
+.service-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.service-box {
+  background: darkblue;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  width: 280px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.service-box img {
+  margin-bottom: 15px;
+}
+
+.service-box h3 {
+  color: #003366;
+  margin-bottom: 10px;
+}
+
+.service-box p {
+  font-size: 0.95em;
+  color: #555;
+}
+.service-box {
+  background: lightblue;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px;
+  width: 280px;
+  box-shadow: 01 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.service-box:hover {
+  transform: translateY(-5px);
+} {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Full-width hero image */
+        .hero-image {
+            width: 150%;       /* full width */
+            height: 50vh;      /* adjust height as needed */
+            object-fit: 100px; /* ensures image covers entire area without stretching */
+            display: block;
+        }
+
+        /* Optional: overlay text on the image */
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 3rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        /* Container for positioning text */
+        .hero-container {
+            position: relative;
+        }
+        /* Basic nav styling */
+    nav {
+      background-color: none; /* dark background */
+      padding: 10px 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;               /* link color */
+      text-decoration: none;      /* remove underline */
+      margin: 0 15px;             /* spacing between links */
+      font-size: 18px;
+      transition: all 0.3s ease;  /* smooth hover transition */
+    }
+
+    /* Hover effect */
+    nav a:hover {
+      color: #ffcc00;             /* color on hover */
+      transform: scale(1.1);      /* slightly enlarge on hover */
+    }
+    .about-container {
+  display: flex;            /* places image and text side by side */
+  align-items: flex-start;  /* align items at the top */
+  gap: 20px;                /* space between image and text */
+  max-width: 1200px;        /* limit total width */
+  margin: 40px auto;        /* center the block */
+  padding: 20px;
+}
+
+.about-image img {
+  width: 400px;             /* adjust as you need */
+  height: auto;
+  border-radius: 10px;      /* optional rounded corners */
+}
+
+.about-text {
+  flex: 1;                  /* take remaining space */
+}
+
+.about-text h1 {
+  margin-top: 0;
+  color: #333;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* pushes tagline to the right */
+  flex-wrap: wrap;                /* allows wrapping on small screens */
+  gap: 10px;
+}
+
+.header-container h1 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;                     /* space between logo & title text */
+}
+
+.header-container h1 img {
+  height: 50px;
+  width: auto;
+}
+
+.header-container .tagline {
+  color: lightgreen;
+  margin: 0;
+  font-style: italic;
+  white-space: nowrap;            /* keep tagline on one line if possible */
+}
+
+/* Responsive for small screens */
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column;       /* stack items vertically */
+    align-items: flex-start;      /* left-align items */
+  }
+
+  .header-container .tagline {
+    margin-top: 5px;              /* small gap below h1 */
+  }
+}
+/* Floating chat widget */
+#chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+}
+
+#chat-toggle {
+  background-color: #0066cc;
+  color: darkgrey;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 18px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#chat-window {
+  display: none;
+  width: 300px;
+  max-height: 400px;
+  background: darkgrey;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  flex-direction: column;
+  overflow: hidden;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#chat-header {
+  background-color: #0066cc;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#chat-messages {
+  flex: 1;
+  padding: 10px;
+  height: 200px;
+  overflow-y: auto;
+}
+
+.message {
+  padding: 8px 12px;
+  margin: 5px 0;
+  border-radius: 20px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.user-message {
+  background-color: #cce5ff;
+  align-self: flex-end;
+}
+
+.bot-message {
+  background-color: #d4edda;
+  align-self: flex-start;
+}
+
+#chat-input-area {
+  display: flex;
+  padding: 5px;
+  border-top: 1px solid #ccc;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+}
+
+#chat-send {
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: none;
+  background-color: lightcyan;
+  color: white;
+  cursor: pointer;
+}
+
+#chatIcon {
+  position: movable;
+  bottom: 5px;     /* distance from bottom */
+  right: 5px;      /* distance from right */
+  background: #007bff;
+  color: white;
+  font-size: 20px;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+/* Chat Box */
+#chatBox {
+  display: none;
+  position: movable;
+  bottom: 80px;    /* keeps box above the icon */
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+} 

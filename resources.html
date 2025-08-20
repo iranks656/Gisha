@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gisha Freighters Uganda Ltd</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header>
+
+    <div class="header-container" align-items="left" gap="0px">
+    <h1>
+      <img src="assets/image/log.png" alt="Gisha Logo">
+      Gisha Freighters <i>Uganda Limited</i>
+    </h1>
+    <p class="tagline" align="left"><i>#Gisha Really Satisfies</i></p>
+  </div>
+    
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="resources.html">Resources</a>
+      <a href="#contact">Get in Touch</a>
+    </nav>
+
+  </header>
+
+  <main>
+  <section class="helpful-guides">
+    <h2>Helpful Guides</h2>
+    <p>Learn more about import & export processes, URA clearance procedures, and tax compliance in Uganda and across East Africa.</p>
+    <ul>
+      <li>Understanding Customs Transit</li>
+      <li>Import vs Export Tax Obligations</li>
+      <li>Common Clearing Documents (EX1, IM4, WH7, etc.)</li>
+    </ul>
+  </section>
+
+  <section class="resources-section">
+    <h2>Resources</h2>
+    <div class="resources-container">
+      <div class="resource-box">
+        <h3>Logistics & Clearing</h3>
+        <ul>
+          <li><a href="docs/customs-guide.pdf">Customs Guide for East Africa</a></li>
+          <li><a href="docs/shipping-procedures.pdf">Shipping Procedures & Documentation</a></li>
+        </ul>
+      </div>
+      <div class="resource-box">
+        <h3>Tax & Compliance</h3>
+        <ul>
+          <li><a href="docs/tax-compliance.pdf">Tax Compliance Handbook</a></li>
+          <li><a href="docs/import-export-tips.pdf">Tips for Smooth Import/Export</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+ <footer text_align="center">
+    <p>Email: <a href="mailto:gishafreighters@gmail.com">gishafreighters@gmail.com</a> || Location: Cyanika, Bunagana</p>
+
+    <p>P.O BOX, 470069, Kisoro-Uganda || Tell: +256-770-740-151 / +256-783-461-393</p>
+    <p>
+    Join our groups: 
+    <a href="https://www.facebook.com/YourFacebookGroup" target="_blank">Facebook</a> | 
+    <a href="https://www.linkedin.com/groups/10146729/" target="_blank">LinkedIn</a>
+  </p>
+  
+    <p>&copy; 2025 Gisha Freighters Uganda Ltd. All Rights Reserved.</p><br>
+
+  </footer>
+  <!-- Chat Widget -->
+<div id="chat-widget">
+  <button id="chat-toggle">💬 Chat</button>
+  <div id="chat-window" style="display:none; flex-direction: column;">
+    
+    <!-- LOGIN FORM -->
+    <div id="login-container" style="display:flex; flex-direction: column; gap:5px;">
+      <input type="text" id="fullName" placeholder="Full Name" required>
+      <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
+      <button id="loginBtn" type="button">Start Chat</button>
+    </div>
+
+    <!-- CHAT AREA -->
+    <div id="chat-area" style="display:none; flex-direction: column;">
+      <div id="chat-messages" style="flex:1; overflow-y:auto; border:1px solid #ddd; padding:5px;"></div>
+      <input type="text" id="chat-input" placeholder="Type your message..." send>
+      <button id="chat-send" type="button" send>Send</button>
+    </div>
+    
+  </div>
+</div>
+
+<script>
+const chatToggle = document.getElementById('chat-toggle');
+const chatWindow = document.getElementById('chat-window');
+chatToggle.addEventListener('click', ()=>{ 
+  chatWindow.style.display = chatWindow.style.display==='flex' ? 'none' : 'flex'; 
+  chatWindow.style.flexDirection = 'column'; 
+});
+
+const loginBtn = document.getElementById('loginBtn');
+loginBtn.addEventListener('click', ()=>{
+  const name = document.getElementById('fullName').value.trim();
+  const phone = document.getElementById('phoneNumber').value.trim();
+  if(!name||!phone){ alert("Enter full name & phone"); return; }
+  sessionStorage.setItem('userName', name);
+  sessionStorage.setItem('userPhone', phone);
+  document.getElementById('login-container').style.display='none';
+  document.getElementById('chat-area').style.display='flex';
+});
+
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const chatSend = document.getElementById('chat-send');
+
+chatSend.addEventListener('click', sendMessage);
+chatInput.addEventListener('keypress', e => { if(e.key==='Enter') sendMessage(); });
+
+function appendMessage(text, sender){
+  const div = document.createElement('div');
+  div.classList.add('message', sender==='user' ? 'user-message' : 'bot-message');
+  div.textContent = text;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function sendMessage(){
+  const msg = chatInput.value.trim();
+  if(!msg) return;
+  const userName = sessionStorage.getItem('userName');
+  const userPhone = sessionStorage.getItem('userPhone');
+  appendMessage(msg,'user');
+  chatInput.value='';
+  sendToWhatsApp(userName,userPhone,msg);
+}
+
+function sendToWhatsApp(userName,userPhone,message){
+  const phoneNumber = "+256770740151";
+  const text = `New chat from ${userName} (${userPhone}): ${message}`;
+  const url = `https://wa.me/${phoneNumber.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
+  window.open(url,'_blank');
+}
+</script>
+</body>
+</html>
