@@ -209,6 +209,53 @@ function sendToWhatsApp(userName,userPhone,message){
         <p>New feedback submitted</p>
     </div>
 </div>
+  <script src="https://cdn.jsdelivr.net/npm/tabletop@1.6.0/src/tabletop.min.js"></script>
+<script>
+  const sheetID = 'YOUR_SHEET_ID_HERE'; // replace with your Google Sheet ID
+  let notifications = [];
+
+  function updateNotifications() {
+    const dropdown = document.getElementById('notification-dropdown');
+    const count = document.getElementById('notification-count');
+
+    dropdown.innerHTML = '';
+    notifications.forEach(n => {
+      const p = document.createElement('p');
+      p.textContent = `${n.Timestamp} - ${n.Name}: ${n.Message || 'Rating ' + n.Rating}`;
+      dropdown.appendChild(p);
+    });
+
+    count.textContent = notifications.length;
+  }
+
+  function init() {
+    Tabletop.init({
+      key: sheetID,
+      simpleSheet: true,
+      callback: function(data) {
+        notifications = data;
+        updateNotifications();
+      }
+    });
+
+    const bell = document.getElementById("notification-bell");
+    const dropdown = document.getElementById("notification-dropdown");
+
+    bell.addEventListener("click", () => {
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    });
+
+    // Close dropdown if clicked outside
+    window.addEventListener("click", function(e) {
+      if (!bell.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.style.display = "none";
+      }
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', init);
+</script>
+
 
 
 
