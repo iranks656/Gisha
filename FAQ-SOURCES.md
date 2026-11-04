@@ -1,0 +1,7 @@
+# FAQ content notes
+
+Reviewed 4 November 2026. The live FAQ copy in `index.html` is written in original wording for Gisha Freighters Uganda Ltd. Topics were adapted from common questions on the [Summit Worldlink Freighters website](https://www.summitworldlink.co.ug/), including clearance timing, documents, estimate limitations, cargo types, routes, and warehousing. Summit-specific claims, exact wording, vehicle tax calculations, number-plate charges, named offices/ports, and warehousing security features were not transferred to Gisha.
+
+For document and tax caveats, the FAQ points visitors to the [Uganda Revenue Authority Import & Export FAQs](https://ura.go.ug/en/import-export-faqs/) and uses the [U.S. Department of Commerce Uganda customs regulations guide](https://www.trade.gov/country-commercial-guides/uganda-customs-regulations) as a secondary overview. These sources describe document categories and customs valuation, but the site deliberately gives no fixed duty rates or universal document checklist. Shipment and permit requirements vary by cargo and route; confirm current requirements with URA and the relevant authorities.
+
+The supplied Gisha source did not confirm vehicle sourcing, a vehicle duty calculator, special handling of dangerous/perishable cargo, particular foreign offices or ports, or fixed clearance times. The public FAQ describes these limitations rather than implying that the services are available.
