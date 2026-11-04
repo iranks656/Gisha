@@ -1,62 +1,69 @@
-const menuToggle = document.getElementById('menu-toggle');
-const mainNav = document.getElementById('main-nav');
+const menuButton = document.querySelector('.menu-toggle');
+const navigation = document.querySelector('.primary-navigation');
 
-menuToggle.addEventListener('click', () => {
-  const isOpen = mainNav.classList.toggle('open');
-  menuToggle.setAttribute('aria-expanded', String(isOpen));
-  menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
-  menuToggle.textContent = isOpen ? '×' : '☰';
-});
+if (menuButton && navigation) {
+  const closeMenu = () => {
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open navigation menu');
+    navigation.classList.remove('is-open');
+  };
 
-document.querySelectorAll('.main-nav a').forEach(link => {
-  link.addEventListener('click', () => {
-    mainNav.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    menuToggle.setAttribute('aria-label', 'Open navigation');
-    menuToggle.textContent = '☰';
+  menuButton.addEventListener('click', () => {
+    const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', String(!isOpen));
+    menuButton.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+    navigation.classList.toggle('is-open', !isOpen);
   });
-});
 
-// Highlight the navigation item for the section currently in view.
-const sections = document.querySelectorAll('main section[id]');
-const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+  navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+}
+
+const yearNode = document.querySelector('#current-year');
+if (yearNode) yearNode.textContent = String(new Date().getFullYear());
+
+const form = document.querySelector('#contact-form');
+const formStatus = document.querySelector('#form-status');
+
+if (form && formStatus) {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    formStatus.textContent = '';
+    formStatus.classList.remove('is-error');
+
+    if (!form.reportValidity()) return;
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.setAttribute('aria-busy', 'true');
+    submitButton.dataset.originalLabel = submitButton.textContent;
+    submitButton.textContent = 'Sending…';
+    formStatus.textContent = 'Sending your enquiry…';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
       });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        const detail = Array.isArray(result.errors) ? result.errors.map((error) => error.message).join(' ') : '';
+        throw new Error(detail || 'The form service did not accept the message.');
+      }
+
+      form.reset();
+      formStatus.textContent = 'Thank you. Your message has been sent to Gisha Freighters.';
+    } catch (error) {
+      formStatus.textContent = 'We could not send your message just now. Please email gishafreighters@gmail.com or use the WhatsApp link below.';
+      formStatus.classList.add('is-error');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.removeAttribute('aria-busy');
+      submitButton.textContent = submitButton.dataset.originalLabel || 'Send your enquiry';
     }
   });
-}, { rootMargin: '-35% 0px -55% 0px' });
-sections.forEach(section => observer.observe(section));
-
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// WhatsApp contact widget. Messages are opened in WhatsApp for the visitor to send.
-const chatPanel = document.getElementById('chat-panel');
-const chatToggle = document.getElementById('chat-toggle');
-const chatClose = document.getElementById('chat-close');
-
-function setChatOpen(open) {
-  chatPanel.hidden = !open;
-  chatToggle.setAttribute('aria-expanded', String(open));
 }
-chatToggle.addEventListener('click', () => setChatOpen(chatPanel.hidden));
-chatClose.addEventListener('click', () => setChatOpen(false));
-
-document.getElementById('chat-send').addEventListener('click', () => {
-  const name = document.getElementById('chat-name').value.trim();
-  const phone = document.getElementById('chat-phone').value.trim();
-  const message = document.getElementById('chat-message').value.trim();
-
-  if (!name || !phone || !message) {
-    alert('Please enter your name, phone number and message.');
-    return;
-  }
-
-  const businessNumber = '256770740151';
-  const text = `Hello Gisha Freighters, my name is ${name}. My phone number is ${phone}. ${message}`;
-  const whatsappUrl = `https://wa.me/${businessNumber}?text=${encodeURIComponent(text)}`;
-  window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-});
